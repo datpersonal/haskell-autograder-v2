@@ -1,7 +1,7 @@
 --Improvised code from github: https://github.com/danalizieors/haskell-autograder
 {-# LANGUAGE NoImplicitPrelude #-}
 --DO NOT MODIFY--
-module SolutionPA2Key   
+module SolutionPA2   
 ( module Prelude
   ,foldr
   ) where
