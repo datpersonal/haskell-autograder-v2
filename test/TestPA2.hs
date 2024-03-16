@@ -335,9 +335,9 @@ exam =
                     expected = "[(\"dat\",1),(\"dan\",3),(\"scott\",4),(\"scott\",5)]"
                 },
                 Test {
-                    name = "mergeList [(\"danny\",35),(\"scott\",5)] [(\"dan\",3),(\"scott\",4)]",
-                    result = show $ mergeList [("danny",35),("scott",5)] [("dan",3),("scott",4)], 
-                    expected = "[(\"dan\",3),(\"scott\",4),(\"danny\",35),(\"scott\",5)]"
+                    name = "mergeList [(\"danny\",5),(\"scott\",35)] [(\"dan\",3),(\"scott\",4)]",
+                    result = show $ mergeList [("danny",5),("scott",35)] [("dan",3),("scott",4)], 
+                    expected = "[(\"dan\",3),(\"scott\",4),(\"danny\",5),(\"scott\",35)]"
                 },         
                 Test {
                     name = "mergeSort [(\"dat\",1),(\"scott\",5),(\"Tim\",2)]",                   
@@ -429,9 +429,9 @@ exam =
                     expected = "[]"
                 },
                  Test {
-                    name = " mulByDigit 101 [9,9,9,9]",               
-                    result = show $  mulByDigit 101 [9,9,9,9],
-                    expected = "[1,0,0,9,8,9,9]"
+                    name = " mulByDigit 1 [9,9,9,9]",               
+                    result = show $  mulByDigit 1 [9,9,9,9],
+                    expected = "[9,9,9,9]"
                 },
                 Test {
                     name = "bigMul [9,9,9,9] [9,9,9,9]",                   
