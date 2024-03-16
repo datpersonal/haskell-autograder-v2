@@ -1,25 +1,52 @@
 --Improvised code from github: https://github.com/danalizieors/haskell-autograder
+--Do Not Modify--
 {-# LANGUAGE NoImplicitPrelude #-}
---DO NOT MODIFY--
-module SolutionPA2   
-( module Prelude
+module SolutionPA2
+ ( module Prelude
   ,foldr
+  , coloredPrint
+    , myMod
+    , toDigit
+    , reverseList
+    , sumList
+    , toDigitRev
+    , myDouble
+    , doubleEveryOther
+    , mySquare
+    , sqSum
+    , sepConcat
+    , validate
+    , splitHalf
+    , mergeList
+    , mergeSort
+    , clone
+    , padZero
+    , removeZero
+    , bigAdd
+    , sumDigits
+    , mulByDigit
+    , bigMul
+
   ) where
 
 import Prelude
   ( Int, Integer, String, Bool(..)
-  , Num(..), Eq(..), Ord(..), Integral(..)
+  , Num((+),(-),(*)), Eq(..), Ord(..), Integral(div)
   , error, otherwise
-  , (.), length, (++)  
-  , map,  elem,take,drop,($)
+  , length, (++) , abs
+  , map, take,drop
   )
 
-import qualified Data.List  (foldr)
+import qualified Data.List (foldr)
 foldr :: (a -> b -> b) -> b -> [a] -> b
 foldr = Data.List.foldr
--- command to run the test:
--- ghc /home/cs/cs420/autograder/PA2/Test.hs -e main
 
+-- command to run the autograder test:
+-- ghc /home/cs/cs420/autograder/PA2/Test.hs -e main
+--
+-- command to run the individual test:
+-- ghci Test.hs
+--
 -- colored printing enabled
 coloredPrint = True
 --DO NOT MODIFY--
@@ -27,10 +54,10 @@ coloredPrint = True
 --Write your solution below--
 --Write your solutions after Function Type, the sentence after that is just a placeholder
 
--- Part A: Basic Haskell Prelude 
+-- Part A: Basic Haskell Prelude
 -- In this part of the assignment you will create your own prelude libraries
 
---myMod 
+--myMod
 --Write your own modulus function that is calculate the remainder
 --
 -- myMod 12 4
@@ -41,23 +68,23 @@ coloredPrint = True
 --
 -- myMod 12 12
 -- >>> 0
+
 myMod :: Int -> Int -> Int
-myMod x y = x - (y * (x `div` y))
-
-
---toDigit 
+myMod x y = if x < y then x else myMod (x -y) y
+--toDigit
 --The function is to convert a positive number to a list of number, if it is negative or 0 then return empty list
 --
 -- toDigit 13
 -- >>> [1,3]
 --
--- toDigit 0 
+-- toDigit 0
 -- >>> []
 --
--- toDigit (-13) 
+-- toDigit (-13)
 -- >>> []
-toDigit :: Int -> [Int] 
-toDigit x = if x <= 0 then [] else toDigit (x `div` 10) ++ [myMod x 10]
+
+--toDigit :: Int -> [Int]
+toDigit _ = "not implemented"
 
 
 --reverseList (10 pts)
@@ -69,11 +96,10 @@ toDigit x = if x <= 0 then [] else toDigit (x `div` 10) ++ [myMod x 10]
 -- reverseList "racecar"
 -- >>> "racecar"
 
-reverseList :: [a] -> [a]
-reverseList [] = []
-reverseList (x:xs) = reverseList xs ++ [x]
+--reverseList :: [a] -> [a]
+reverseList _ = "not implemented"
 
---sumList 
+--sumList
 --The function is used to get the sum of a list of number
 -- sumList [1,2,3,4]
 -- >>> 10
@@ -81,77 +107,74 @@ reverseList (x:xs) = reverseList xs ++ [x]
 -- sumList [1,2,3,(-2)]
 -- >>> 4
 --
--- sumList [] 
+-- sumList []
 -- >>> 0
 
-sumList :: [Int] -> Int
-sumList [] = 0
-sumList (x:xs) = x + sumList xs
+--sumList :: [Int] -> Int
+sumList _ = "not implemented"
 
 
 
---toDigitRev is used to reverse toDigit list 
+--toDigitRev is used to reverse toDigit list
 --
 -- toDigitRev 34
 -- >>> [4,3]
 --
--- toDigitRev 53 
+-- toDigitRev 53
 -- >>> [3,5]
 --
 -- toDigitRev 10
 -- >>> [0,1]
 
-toDigitRev :: Int -> [Int]
-toDigitRev x = reverseList (toDigit x)
+--toDigitRev :: Int -> [Int]
+toDigitRev _ = "not implemented"
 
 -- Part B: Folding Function
 -- In this part of the problems, you have to use foldr. Every function will be check for the foldr unless specified otherwise such as doubleEveryOther
 -- Without using foldr, your function will be mark 0 even if the output is correct
 
 --myDouble
---Write your own double function that is using foldr 
+--Write your own double function that is using foldr
 --without using fold it will be 0 even the output is right
 --
--- myDouble 2 
+-- myDouble 2
 -- >>> 4
 --
 -- myDouble 4
 -- >>> 8
--- 
--- myDouble 0 
+--
+-- myDouble 0
 -- >>> 0
-myDouble :: Int -> Int
+
+--myDouble :: Int -> Int
 myDouble x = foldr (*) 2 [x]
 
 
--- doubleEveryOther will double the value of every other digit from left to right, beginning with the second digit 
+-- doubleEveryOther will double the value of every other digit from left to right, beginning with the second digit
 -- NOTE: You do not have to use foldr for this particular function.
 --
 -- doubleEveryOther [1,2,3,4]
 -- >>> [1,4,3,8]
 --
--- doubleEveryOther [1,2,3] 
+-- doubleEveryOther [1,2,3]
 -- >>> [1,4,3]
 
-doubleEveryOther :: [Int] -> [Int]
-doubleEveryOther [] = []
-doubleEveryOther [x] = [x]
-doubleEveryOther (x:y:xs) = x : (myDouble y) : doubleEveryOther xs
-
+--doubleEveryOther :: [Int] -> [Int]
+doubleEveryOther _ = " not implemented"
 --mySquare
---Write your own my square function using foldr 
+--Write your own my square function using foldr
 --
 -- mySquare 0
 -- >>> 0
 --
 -- mySquare 1
 -- >>> 1
--- 
+--
 -- mySquare (-5)
 -- >>> 25
 
-mySquare :: Int -> Int
-mySquare x = foldr (*) 2 [x] 
+--mySquare :: Int -> Int
+mySquare _ = "not implemented"
 
 
 -- Write sqSum function such that sqSum [x1, ... , xn] should return (x1^2 + ... + xn^2)
@@ -166,22 +189,19 @@ mySquare x = foldr (*) 2 [x]
 -- 30
 
 --sqSum :: [Int] -> Int
-
-sqSum :: [Int] -> Int
-sqSum [] = 0
-sqSum (x:xs) = foldr (+) (mySquare x)[mySquare x| x <- xs]
+sqSum _ = "not implemented"
 
 
 --sumDigits is to add the sum of all the number inside the list that is already turn into single digit (10 pts)
--- 
+--
 -- sumDigits [1,10,12] which is 1 + 1 + 0 + 1 + 2
 -- >>> 5
 --
 -- sumDigits [23,32,(-45)] which is 2 + 3 + 3 + 2 + 0
 -- >>> 10
 
-sumDigits :: [Int] -> Int
-sumDigits xs = foldr ((+) . sumList . toDigit) 0 xs
+--sumDigits :: [Int] -> Int
+sumDigits [_] = "not implemented"
 
 -- sepConcat will concatenate the defined seperator to a list of string. If the list is empty despite the defined seperator return empty string.
 --
@@ -194,10 +214,8 @@ sumDigits xs = foldr ((+) . sumList . toDigit) 0 xs
 -- sepConcat "#" ["a","b","c","d","e"]
 -- >>> "a#b#c#d#e"
 
-sepConcat :: String -> [String] -> String
-sepConcat sep xs = foldr sep' "" xs
-      where 
-            sep' = \a b -> a ++ if b == "" then b else sep ++ b
+--sepConcat :: String -> [String] -> String
+sepConcat _ _ = "not implemented"
 
 
 -- Part C: Credit Card problem
@@ -208,7 +226,7 @@ sepConcat sep xs = foldr sep' "" xs
 --  2) Add the digits of the results of Step 1 to the remaining digits in the credit card number.
 --  3) If the result mod 10 is equal to 0, the number is valid. If the result mod 10 is not equal to 0, the validation fails.
 -- source: https://www.ibm.com/docs/en/order-management-sw/9.3.0?topic=cpms-handling-credit-cards
---To validate the credit card using this website 
+--To validate the credit card using this website
 --https://dnschecker.org/credit-card-validator.php
 --To generate using same website above or this
 --https://www.lambdatest.com/free-online-tools/credit-card-number-generator
@@ -216,21 +234,20 @@ sepConcat sep xs = foldr sep' "" xs
 --
 -- validate 4723304884813
 -- >>> True
--- 
+--
 -- validate 4012888888881881
 -- >>> True
--- 
+--
 -- validate 4012888888881882
 -- >>> False
 
-validate :: Int -> Bool
-validate x | length (toDigit x) < 15 = False 
-           | otherwise = myMod (sumDigits (doubleEveryOther (toDigitRev x))) 10 == 0
+--validate :: Int -> Bool
+validate _ = "not implemented"
 
 
 -- PartD: Sorts algorithms
 
--- splitHalf will split a list of number to 2 half  
+-- splitHalf will split a list of number to 2 half
 --
 -- splitHalf [1,2,3,4,5]
 -- >>> ([1,2],[3,4,5])
@@ -259,7 +276,7 @@ mergeList _ _= "not implemented"
 --
 -- mergeSort [("dat",1),("scott",5),("Tim",2)]
 -- >>> [("dat",1),("Tim",2),("scott",5)]
--- 
+--
 -- mergeSort [("dat",1),("dan",5),("scott",4),("scottish",3)]
 -- >>> [("dat",1),("dat2",3),("scott",4),("scott",5)]
 
@@ -270,7 +287,7 @@ mergeSort _ = "not implemented"
 -- Part E - working with new type
 -- Note: You should not use fold anywhere in this part of the assignment
 type BigInt = [Int]
--- 
+--
 -- You will be writing three helper functions to solve bigAdd, mulByDigit, bigMul
 
 -- `clone x n` returns a `[x,x,...,x]` containing `n` copies of `x`
@@ -286,7 +303,7 @@ clone _ x = "not implemented"
 
 
 -- `padZero l1 l2` returns a pair (l1', l2') which are the input lists,
---  padded with extra `0` on the left such that the lengths of `l1'` 
+--  padded with extra `0` on the left such that the lengths of `l1'`
 --  and `l2'` are equal.
 --
 -- padZero [9,9] [1,0,0,2]
@@ -336,7 +353,7 @@ bigAdd _ _ = "not implemented"
 mulByDigit _ _ = "not implemented"
 
 
--- `bigMul n1 n2` returns the `BigInt` representing the 
+-- `bigMul n1 n2` returns the `BigInt` representing the
 --  product of `n1` and `n2`.
 --
 -- bigMul [9,9,9,9] [9,9,9,9]
@@ -347,10 +364,3 @@ mulByDigit _ _ = "not implemented"
 
 --bigMul :: BigInt -> BigInt -> BigInt
 bigMul _ _ = "not implemented"
-
-
-
-                         
-        }      
-
-    ]
