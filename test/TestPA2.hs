@@ -201,7 +201,7 @@ sqSum _ = "not implemented"
 -- >>> 10
 
 --sumDigits :: [Int] -> Int
-sumDigits [_] = "not implemented"
+sumDigits _ = "not implemented"
 
 -- sepConcat will concatenate the defined seperator to a list of string. If the list is empty despite the defined seperator return empty string.
 --
