@@ -50,7 +50,7 @@ coloredPrint = True
 --DO NOT MODIFY--
 ``` 
 
-Then add the import in the Test.hs file as below to use only those that is imported from the Solution.hs:
+Then add the import list in the Test.hs file as below to use only those that is exported from the Solution.hs:
 ```prolog
 module Test where
 import Text.Printf
