@@ -1,10 +1,51 @@
---DO NOT MODIFY--
-module Solution where
-import Prelude hiding (mod,even,odd,double,square)
+--Do Not Modify--
+{-# LANGUAGE NoImplicitPrelude #-}
+module Solution
+ ( module Prelude
+    , foldr
+    , coloredPrint
+    , myMod
+    , toDigit
+    , reverseList
+    , sumList
+    , toDigitRev
+    , myDouble
+    , doubleEveryOther
+    , mySquare
+    , sqSum
+    , sepConcat
+    , validate
+    , splitHalf
+    , mergeList
+    , mergeSort
+    , clone
+    , padZero
+    , removeZero
+    , bigAdd
+    , sumDigits
+    , mulByDigit
+    , bigMul
 
--- command to run the test:
--- ghci /home/cs/cs420/autograder/assignment1 Test.hs
+  ) where
 
+import Prelude
+  ( Int, Integer, String, Bool(..)
+  , Num((+),(-),(*)), Eq(..), Ord(..), Integral(div)
+  , error, otherwise
+  , length, (++) , abs
+  , map, take,drop
+  )
+
+import qualified Data.List (foldr)
+foldr :: (a -> b -> b) -> b -> [a] -> b
+foldr = Data.List.foldr
+
+-- command to run the autograder test:
+-- ghc /home/cs/cs420/autograder/PA2/Test.hs -e main
+--
+-- command to run the individual test:
+-- ghci Test.hs
+--
 -- colored printing enabled
 coloredPrint = True
 --DO NOT MODIFY--
@@ -28,7 +69,8 @@ coloredPrint = True
 -- >>> 0
 
 --myMod :: Int -> Int -> Int
-myMod _ _ = "not implemented"
+myMod _ _ = "Not implemented"
+
 
 
 --toDigit 
@@ -44,7 +86,7 @@ myMod _ _ = "not implemented"
 -- >>> []
 
 --toDigit :: Int -> [Int] 
-toDigit _ = "not implemented"
+toDigit _ = "Not implemented"
 
 
 --reverseList (10 pts)
@@ -57,7 +99,7 @@ toDigit _ = "not implemented"
 -- >>> "racecar"
 
 --reverseList :: [a] -> [a]
-reverseList _ = "not implemented"
+reverseList _ = "Not implemented"
 
 --sumList 
 --The function is used to get the sum of a list of number
@@ -71,7 +113,7 @@ reverseList _ = "not implemented"
 -- >>> 0
 
 --sumList :: [Int] -> Int
-sumList _ = "not implemented"
+sumList _ = "Not implemented"
 
 
 
@@ -87,9 +129,7 @@ sumList _ = "not implemented"
 -- >>> [0,1]
 
 --toDigitRev :: Int -> [Int]
-toDigitRev _ = "not implemented"
-
-
+toDigitRev _ = "Not implemented"
 
 -- Part B: Folding Function
 -- In this part of the problems, you have to use foldr. Every function will be check for the foldr unless specified otherwise such as doubleEveryOther
@@ -109,11 +149,11 @@ toDigitRev _ = "not implemented"
 -- >>> 0
 
 --myDouble :: Int -> Int
-myDouble _ = "not implemented"
+myDouble _ = " Not implemented "
 
 
 -- doubleEveryOther will double the value of every other digit from left to right, beginning with the second digit 
--- NOTE: You do not have to use foldr for this particular function.
+-- NOTE: You do Not have to use foldr for this particular function.
 --
 -- doubleEveryOther [1,2,3,4]
 -- >>> [1,4,3,8]
@@ -122,24 +162,21 @@ myDouble _ = "not implemented"
 -- >>> [1,4,3]
 
 --doubleEveryOther :: [Int] -> [Int]
-doubleEveryOther [_] = "not implemented"
-
-
-
+doubleEveryOther _ = " Not implemented" 
 --mySquare
 --Write your own my square function using foldr 
 --
--- mySquare [] 
+-- mySquare 0
 -- >>> 0
 --
--- mySquare [1]
+-- mySquare 1
 -- >>> 1
 -- 
--- mySquare [(-5)]
+-- mySquare (-5)
 -- >>> 25
 
 --mySquare :: Int -> Int
-mySquare _ = "not implemented"
+mySquare _ = "Not implemented"
 
 
 -- Write sqSum function such that sqSum [x1, ... , xn] should return (x1^2 + ... + xn^2)
@@ -154,7 +191,7 @@ mySquare _ = "not implemented"
 -- 30
 
 --sqSum :: [Int] -> Int
-sqSum [_] = "not implemented"
+sqSum _ = "Not implemented"
 
 
 --sumDigits is to add the sum of all the number inside the list that is already turn into single digit (10 pts)
@@ -166,7 +203,7 @@ sqSum [_] = "not implemented"
 -- >>> 10
 
 --sumDigits :: [Int] -> Int
-sumDigits [_] = "not implemented"
+sumDigits _ = "Not implemented"
 
 -- sepConcat will concatenate the defined seperator to a list of string. If the list is empty despite the defined seperator return empty string.
 --
@@ -180,7 +217,7 @@ sumDigits [_] = "not implemented"
 -- >>> "a#b#c#d#e"
 
 --sepConcat :: String -> [String] -> String
-sepConcat "" [_] = "not implemented"
+sepConcat _ _ = "Not implemented"
 
 
 -- Part C: Credit Card problem
@@ -189,7 +226,7 @@ sepConcat "" [_] = "not implemented"
 -- Luhn algorithm:
 --  1) Double the value of every other digit from right to left, beginning with the second to last digit.
 --  2) Add the digits of the results of Step 1 to the remaining digits in the credit card number.
---  3) If the result mod 10 is equal to 0, the number is valid. If the result mod 10 is not equal to 0, the validation fails.
+--  3) If the result mod 10 is equal to 0, the number is valid. If the result mod 10 is Not equal to 0, the validation fails.
 -- source: https://www.ibm.com/docs/en/order-management-sw/9.3.0?topic=cpms-handling-credit-cards
 --To validate the credit card using this website 
 --https://dnschecker.org/credit-card-validator.php
@@ -207,7 +244,7 @@ sepConcat "" [_] = "not implemented"
 -- >>> False
 
 --validate :: Int -> Bool
-validate _ = "not implemented"
+validate _ = "Not implemented"
 
 
 -- PartD: Sorts algorithms
@@ -221,36 +258,36 @@ validate _ = "not implemented"
 -- >>> ([1,2,3],[4,5,6])
 
 --splitHalf :: [a] -> ([a], [a])
-splitHalf [] = "not implemented"
+splitHalf _ = "Not implemented"
 
 
 -- mergeList will merge 2 list that is sorted by the key value b
 --
--- mergeList [("dat",1),("scott",5)] [("dat2",3),("scott",4)]
--- >>> [("dat",1),("dat2",3),("scott",4),("scott",5)]
+-- mergeList [("dat",1),("scott",5)] [("dan",3),("scott",4)]
+-- >>> [("dat",1),("dan",3),("scott",4),("scott",5)]
 --
--- mergeList [("danny",35),("scott",5)] [("dat2",3),("scott",4)]
--- >>> [("dat2",3),("scott",4),("danny",35),("scott",5)]
+-- mergeList [("danny",35),("scott",5)] [("dan",3),("scott",4)]
+-- >>> [("dan",3),("scott",4),("danny",35),("scott",5)]
 
 --mergeList :: Ord b => [(a, b)] -> [(a, b)] -> [(a, b)]
-mergeList [(_,_)] [(_,_)] = "not implemented"
+mergeList _ _= "Not implemented"
 
 
 
--- msort will sort using mergeList function
+-- mergeSort will sort using mergeList function
 --
--- msort [("dat",1),("scott",5),("Tim",2)]
+-- mergeSort [("dat",1),("scott",5),("Tim",2)]
 -- >>> [("dat",1),("Tim",2),("scott",5)]
 -- 
--- msort [("dat",1),("dat2",5),("scott",4),("scott",3)]
+-- mergeSort [("dat",1),("dan",5),("scott",4),("scottish",3)]
 -- >>> [("dat",1),("dat2",3),("scott",4),("scott",5)]
 
---msort :: Ord b => [(a,b)] -> [(a,b)]
-msort []  = "not implemented"
+--mergeSort :: Ord b => [(a,b)] -> [(a,b)]
+mergeSort _ = "Not implemented"
 
 
 -- Part E - working with new type
--- Note: You should not use fold anywhere in this part of the assignment
+-- Note: You should Not use fold anywhere in this part of the assignment
 type BigInt = [Int]
 -- 
 -- You will be writing three helper functions to solve bigAdd, mulByDigit, bigMul
@@ -264,7 +301,7 @@ type BigInt = [Int]
 -- >>> ["foo", "foo"]
 
 --clone :: a -> Int -> [a]
-clone _ x = "not implemented"
+clone _ _ = "Not implemented"
 
 
 -- `padZero l1 l2` returns a pair (l1', l2') which are the input lists,
@@ -278,7 +315,7 @@ clone _ x = "not implemented"
 -- >>> ([1,0,0,2], [0,0,9,9])
 
 --padZero :: BigInt -> BigInt -> (BigInt, BigInt)
-padZero _ _ = "not implemented"
+padZero _ _ = "Not implemented"
 
 
 -- `removeZero ls` strips out all leading `0` from the left-side of `ls`.
@@ -293,7 +330,7 @@ padZero _ _ = "not implemented"
 -- >>> []
 
 --removeZero :: BigInt -> BigInt
-removeZero xs = "not implemented"
+removeZero _ = "Not implemented"
 
 
 -- `bigAdd n1 n2` returns the `BigInt` representing the sum of `n1` and `n2`
@@ -305,7 +342,7 @@ removeZero xs = "not implemented"
 -- >>> [1, 0, 9, 9, 8]
 
 --bigAdd :: BigInt -> BigInt -> BigInt
-bigAdd _ [] = "not implemented"
+bigAdd _ _ = "Not implemented"
 
 
 -- `mulByDigit i n` returns the result of multiplying
@@ -315,7 +352,7 @@ bigAdd _ [] = "not implemented"
 -- >>> [8,9,9,9,1]
 
 --mulByDigit :: Int -> BigInt -> BigInt
-mulByDigit _ xs = "not implemented"
+mulByDigit _ _ = "Not implemented"
 
 
 -- `bigMul n1 n2` returns the `BigInt` representing the 
@@ -328,6 +365,6 @@ mulByDigit _ xs = "not implemented"
 -- >>> [9,9,9,9,8,0,0,0,0,1]
 
 --bigMul :: BigInt -> BigInt -> BigInt
-bigMul [] ys = "not implemented"
+bigMul _ _ = "Not implemented"
 
 

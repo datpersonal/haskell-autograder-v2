@@ -1,10 +1,8 @@
 --Improvised code from github: https://github.com/danalizieors/haskell-autograder
---Do Not Modify--
-{-# LANGUAGE NoImplicitPrelude #-}
-module SolutionPA2
- ( module Prelude
-  ,foldr
-  , coloredPrint
+module Test where
+import Text.Printf
+import Solution
+    ( coloredPrint
     , myMod
     , toDigit
     , reverseList
@@ -23,344 +21,476 @@ module SolutionPA2
     , padZero
     , removeZero
     , bigAdd
-    , sumDigits
     , mulByDigit
     , bigMul
+    , foldr
+    , sumDigits
+    )
 
-  ) where
-
-import Prelude
-  ( Int, Integer, String, Bool(..)
-  , Num((+),(-),(*)), Eq(..), Ord(..), Integral(div)
-  , error, otherwise
-  , length, (++) , abs
-  , map, take,drop
-  )
-
-import qualified Data.List (foldr)
-foldr :: (a -> b -> b) -> b -> [a] -> b
-foldr = Data.List.foldr
-
--- command to run the autograder test:
--- ghc /home/cs/cs420/autograder/PA2/Test.hs -e main
---
--- command to run the individual test:
--- ghci Test.hs
---
--- colored printing enabled
-coloredPrint = True
---DO NOT MODIFY--
-
---Write your solution below--
---Write your solutions after Function Type, the sentence after that is just a placeholder
-
--- Part A: Basic Haskell Prelude
--- In this part of the assignment you will create your own prelude libraries
-
---myMod
---Write your own modulus function that is calculate the remainder
---
--- myMod 12 4
--- >>> 0
---
--- myMod 12 5
--- >>> 2
---
--- myMod 12 12
--- >>> 0
-
-myMod :: Int -> Int -> Int
-myMod x y = if x < y then x else myMod (x -y) y
---toDigit
---The function is to convert a positive number to a list of number, if it is negative or 0 then return empty list
---
--- toDigit 13
--- >>> [1,3]
---
--- toDigit 0
--- >>> []
---
--- toDigit (-13)
--- >>> []
-
---toDigit :: Int -> [Int]
-toDigit _ = "not implemented"
-
-
---reverseList (10 pts)
---The function is used to reverse a list of arbitrary type
--- reverseList ['a','b','c']
--- >>> "cba"
--- reverseList [1,2,3,4]
--- >>> [4,3,2,1]
--- reverseList "racecar"
--- >>> "racecar"
-
---reverseList :: [a] -> [a]
-reverseList _ = "not implemented"
-
---sumList
---The function is used to get the sum of a list of number
--- sumList [1,2,3,4]
--- >>> 10
---
--- sumList [1,2,3,(-2)]
--- >>> 4
---
--- sumList []
--- >>> 0
-
---sumList :: [Int] -> Int
-sumList _ = "not implemented"
-
-
-
---toDigitRev is used to reverse toDigit list
---
--- toDigitRev 34
--- >>> [4,3]
---
--- toDigitRev 53
--- >>> [3,5]
---
--- toDigitRev 10
--- >>> [0,1]
-
---toDigitRev :: Int -> [Int]
-toDigitRev _ = "not implemented"
-
--- Part B: Folding Function
--- In this part of the problems, you have to use foldr. Every function will be check for the foldr unless specified otherwise such as doubleEveryOther
--- Without using foldr, your function will be mark 0 even if the output is correct
-
---myDouble
---Write your own double function that is using foldr
---without using fold it will be 0 even the output is right
---
--- myDouble 2
--- >>> 4
---
--- myDouble 4
--- >>> 8
---
--- myDouble 0
--- >>> 0
-
---myDouble :: Int -> Int
-myDouble x = foldr (*) 2 [x]
-
-
--- doubleEveryOther will double the value of every other digit from left to right, beginning with the second digit
--- NOTE: You do not have to use foldr for this particular function.
---
--- doubleEveryOther [1,2,3,4]
--- >>> [1,4,3,8]
---
--- doubleEveryOther [1,2,3]
--- >>> [1,4,3]
-
---doubleEveryOther :: [Int] -> [Int]
-doubleEveryOther _ = " not implemented"
---mySquare
---Write your own my square function using foldr
---
--- mySquare 0
--- >>> 0
---
--- mySquare 1
--- >>> 1
---
--- mySquare (-5)
--- >>> 25
-
---mySquare :: Int -> Int
-mySquare _ = "not implemented"
-
-
--- Write sqSum function such that sqSum [x1, ... , xn] should return (x1^2 + ... + xn^2)
---
--- >>> sqSum []
--- 0
---
--- >>> sqSum [1,2,3,4]
--- 30
---
--- >>> sqSum [(-1), (-2), (-3), (-4)]
--- 30
-
---sqSum :: [Int] -> Int
-sqSum _ = "not implemented"
-
-
---sumDigits is to add the sum of all the number inside the list that is already turn into single digit (10 pts)
---
--- sumDigits [1,10,12] which is 1 + 1 + 0 + 1 + 2
--- >>> 5
---
--- sumDigits [23,32,(-45)] which is 2 + 3 + 3 + 2 + 0
--- >>> 10
-
---sumDigits :: [Int] -> Int
-sumDigits _ = "not implemented"
-
--- sepConcat will concatenate the defined seperator to a list of string. If the list is empty despite the defined seperator return empty string.
---
--- sepConcat ", " []
--- >>> ""
---
--- sepConcat ", " ["foo", "bar", "baz"]
--- >>> "foo, bar, baz"
---
--- sepConcat "#" ["a","b","c","d","e"]
--- >>> "a#b#c#d#e"
-
---sepConcat :: String -> [String] -> String
-sepConcat _ _ = "not implemented"
-
-
--- Part C: Credit Card problem
-
--- Using the above written functions, create a validate function will decide if a number is legal to use as credit card using Luhn algorithm
--- Luhn algorithm:
---  1) Double the value of every other digit from right to left, beginning with the second to last digit.
---  2) Add the digits of the results of Step 1 to the remaining digits in the credit card number.
---  3) If the result mod 10 is equal to 0, the number is valid. If the result mod 10 is not equal to 0, the validation fails.
--- source: https://www.ibm.com/docs/en/order-management-sw/9.3.0?topic=cpms-handling-credit-cards
---To validate the credit card using this website
---https://dnschecker.org/credit-card-validator.php
---To generate using same website above or this
---https://www.lambdatest.com/free-online-tools/credit-card-number-generator
-
---
--- validate 4723304884813
--- >>> True
---
--- validate 4012888888881881
--- >>> True
---
--- validate 4012888888881882
--- >>> False
-
---validate :: Int -> Bool
-validate _ = "not implemented"
-
-
--- PartD: Sorts algorithms
-
--- splitHalf will split a list of number to 2 half
---
--- splitHalf [1,2,3,4,5]
--- >>> ([1,2],[3,4,5])
---
--- splitHalf [1,2,3,4,5,6]
--- >>> ([1,2,3],[4,5,6])
-
---splitHalf :: [a] -> ([a], [a])
-splitHalf _ = "not implemented"
-
-
--- mergeList will merge 2 list that is sorted by the key value b
---
--- mergeList [("dat",1),("scott",5)] [("dan",3),("scott",4)]
--- >>> [("dat",1),("dan",3),("scott",4),("scott",5)]
---
--- mergeList [("danny",35),("scott",5)] [("dan",3),("scott",4)]
--- >>> [("dan",3),("scott",4),("danny",35),("scott",5)]
-
---mergeList :: Ord b => [(a, b)] -> [(a, b)] -> [(a, b)]
-mergeList _ _= "not implemented"
-
-
-
--- mergeSort will sort using mergeList function
---
--- mergeSort [("dat",1),("scott",5),("Tim",2)]
--- >>> [("dat",1),("Tim",2),("scott",5)]
---
--- mergeSort [("dat",1),("dan",5),("scott",4),("scottish",3)]
--- >>> [("dat",1),("dat2",3),("scott",4),("scott",5)]
-
---mergeSort :: Ord b => [(a,b)] -> [(a,b)]
-mergeSort _ = "not implemented"
-
-
--- Part E - working with new type
--- Note: You should not use fold anywhere in this part of the assignment
-type BigInt = [Int]
---
--- You will be writing three helper functions to solve bigAdd, mulByDigit, bigMul
-
--- `clone x n` returns a `[x,x,...,x]` containing `n` copies of `x`
---
--- clone 3 5
--- >>> [3,3,3,3,3]
---
--- clone "foo" 2
--- >>> ["foo", "foo"]
-
---clone :: a -> Int -> [a]
-clone _ x = "not implemented"
-
-
--- `padZero l1 l2` returns a pair (l1', l2') which are the input lists,
---  padded with extra `0` on the left such that the lengths of `l1'`
---  and `l2'` are equal.
---
--- padZero [9,9] [1,0,0,2]
--- >>> ([0,0,9,9], [1,0,0,2])
---
--- padZero [1,0,0,2] [9,9]
--- >>> ([1,0,0,2], [0,0,9,9])
-
---padZero :: BigInt -> BigInt -> (BigInt, BigInt)
-padZero _ _ = "not implemented"
-
-
--- `removeZero ls` strips out all leading `0` from the left-side of `ls`.
---
--- removeZero [0,0,0,1,0,0,2]
--- >>> [1,0,0,2]
---
--- removeZero [9,9]
--- >>> [9,9]
---
--- removeZero [0,0,0,0]
--- >>> []
-
---removeZero :: BigInt -> BigInt
-removeZero xs = "not implemented"
-
-
--- `bigAdd n1 n2` returns the `BigInt` representing the sum of `n1` and `n2`
---
--- bigAdd [9, 9] [1, 0, 0, 2]
--- >>> [1, 1, 0, 1]
---
--- bigAdd [9, 9, 9, 9] [9, 9, 9]
--- >>> [1, 0, 9, 9, 8]
-
---bigAdd :: BigInt -> BigInt -> BigInt
-bigAdd _ _ = "not implemented"
-
-
--- `mulByDigit i n` returns the result of multiplying
---  the digit `i` (between 0..9) with `BigInt` `n`.
---
--- mulByDigit 9 [9,9,9,9]
--- >>> [8,9,9,9,1]
-
---mulByDigit :: Int -> BigInt -> BigInt
-mulByDigit _ _ = "not implemented"
-
-
--- `bigMul n1 n2` returns the `BigInt` representing the
---  product of `n1` and `n2`.
---
--- bigMul [9,9,9,9] [9,9,9,9]
--- >>> [9,9,9,8,0,0,0,1]
---
--- bigMul [9,9,9,9,9] [9,9,9,9,9]
--- >>> [9,9,9,9,8,0,0,0,0,1]
-
---bigMul :: BigInt -> BigInt -> BigInt
-bigMul _ _ = "not implemented"
+
+-- colored printing functionality
+data Color = Normal | Red | Green
+
+codeFor Normal = 0
+codeFor Red = 31
+codeFor Green = 32
+
+stringFor color = "\x1b[" ++ show (codeFor color) ++ "m"
+
+paint color string
+    | coloredPrint = stringFor color ++ string ++ stringFor Normal
+    | otherwise = string
+
+
+-- methods and data structures used for verifying the solutions and displaying the results
+data Problem = Problem {
+    title :: String,
+    description :: String,
+    score :: Double,
+    tests :: [Test]
+} deriving (Show)
+
+data Test = Test {
+    name :: String,   
+    expected :: String,
+    result :: String
+} deriving (Show)
+
+
+line = "--------------------------------------------------------------------------------"
+
+displayExam exam =
+    let solved = calculateSolved exam
+        given = calculateGiven exam
+        scored = calculateScored exam
+        maximum = calculateMaximum exam
+        result = displayResult scored maximum
+    in intro ++ displayProblems exam ++ outro result
+
+intro = let title = "--== Haskell Programming Assignment 2 ==--"
+        in printf "\n\n%s\n                      %s\n%s\n\n\n" line title line
+
+outro result = printf "%s\n    Results: %s\n%s\n\n\n" line result line
+
+displayResult scored maximum =
+    displayScore (resultColor scored maximum) scored maximum
+
+displayProblems problems = mapConcat displayProblem problems
+
+displayProblem problem@(Problem title description score tests) =
+    let solved = solveTests tests
+        label = displayLabel scored maximum 
+        given = length tests               
+        header = printf "    %s\n\n" title
+        body = printf "%s\n\n%s\n%s\n\n" description (displayTests tests) label
+        scored = scoreProblem problem
+        maximum = score
+    in header ++ body
+
+displayLabel scored maximum =
+    displayScore (labelColor scored maximum) scored maximum
+
+displayTests :: [Test] -> String
+displayTests tests = mapConcat displayTest tests
+
+displayTest test@(Test name expected result) =
+    let correct = solveTest test
+        label = if correct then paint Green "PASS" else paint Red "FAIL"
+        arrow = (paint Green "\n=> Expected Output: ")
+        corrected = (paint Green expected)
+        mistake = if correct then "" else printf "| Your Output: %s" (paint Red result)
+        header = printf "    %s  %s" label name
+        body = printf "           %s %s %s\n\n" arrow corrected mistake
+    in header ++ body
+
+
+
+labelColor solved given
+    | solved == given = Green
+    | otherwise = Red
+
+resultColor scored maximum
+    | maximum / 2 <= scored = Green
+    | otherwise = Red
+
+calculateSolved problems = sum $ map (solveTests . tests) problems
+calculateGiven problems = sum $ map (length . tests) problems
+calculateScored problems = sum $ map scoreProblem problems
+calculateMaximum problems = sum $ map score problems
+
+scoreProblem (Problem _ _ score tests) =
+    let solved = fromIntegral $ solveTests tests
+        given = fromIntegral $ length tests
+    in score * solved / given
+    
+displayScore color scored maximum =
+    paint color $ printf "[%.2f/%.2f] | [%.2f%%]" scored maximum ((scored / maximum) * 100)
+
+solveTests = length . filter solveTest
+solveTest (Test _ expected result) = expected == result
+
+mapConcat f = Solution.foldr (++) [] . map f
+
+main = putStr $ displayExam $ exam
+
+
+-- define the problems and the solutions
+exam =
+    [
+        Problem 
+        {
+            title = "Part A: Haskell Prelude Library",
+            description = "You will create your own version of prelude functions",
+            score = 10,
+            tests = 
+            [
+                Test {
+                    name = "myMod 12 4",                   
+                    result = show $ myMod 12 4,
+                    expected = "0"
+                },
+                Test {
+                    name = "myMod 13 4",                    
+                    result = show $ myMod 13 4, 
+                    expected = "1"
+                },              
+                Test {
+                    name = "myMod 12 12",                 
+                    result = show $ myMod 12 12,
+                    expected = "0"
+                },
+                Test {
+                    name = "toDigit 13",                   
+                    result = show $ toDigit 13,
+                    expected = "[1,3]"
+                },
+                Test {
+                    name = "toDigit 0",                  
+                    result = show $ toDigit 0 , 
+                    expected = "[]"
+                },              
+                Test {
+                    name = "toDigit (-13)",                   
+                    result = show $ toDigit (-13),
+                    expected = "[]"
+                },
+                Test {
+                    name = "reverseList ['a','b','c']",                  
+                    result = show $ reverseList ['a','b','c'],
+                    expected = "\"cba\""
+                },
+                Test {
+                    name = "reverseList [1,2,3,4]",                   
+                    result = show $ reverseList [1,2,3,4], 
+                    expected = "[4,3,2,1]"
+                },              
+                Test {
+                    name = "reverseList \"racecar\"",                   
+                    result = show $ reverseList "racecar",
+                    expected = "\"racecar\""
+                },
+                Test {
+                    name = "sumList [1,2,3,4]",                   
+                    result = show $ sumList [1,2,3,4],
+                    expected = "10"
+                },
+                Test {
+                    name = "sumList [1,2,3,(-2)]",
+                    result = show $ sumList [1,2,3,(-2)], 
+                    expected = "4"
+                },              
+                Test {
+                    name = "sumList []",               
+                    result = show $ sumList [],
+                    expected = "0"
+                },
+                Test {
+                    name = "toDigitRev 34",                   
+                    result = show $ toDigitRev 34,
+                    expected = "[4,3]"
+                },
+                Test {
+                    name = "toDigitRev 53",
+                    result = show $ toDigitRev 53, 
+                    expected = "[3,5]"
+                },              
+                Test {
+                    name = "toDigitRev 10",               
+                    result = show $ toDigitRev 10,
+                    expected = "[0,1]"
+                }
+            ]
+        },
+        Problem 
+        {
+            title = "Part B: Folding Function",
+            description = "In this part of the problems, you have to use foldr unless specifies otherwise",
+            score = 18,
+            tests = 
+            [
+                Test {
+                    name = "myDouble 2",                   
+                    result = show $ myDouble 2,
+                    expected = "4"
+                },
+                Test {
+                    name = "myDouble 4",                  
+                    result = show $ myDouble 4, 
+                    expected = "8"
+                },              
+                Test {
+                    name = "myDouble 0",                   
+                    result = show $ myDouble 0,
+                    expected = "0"
+                },                
+                Test {
+                    name = "doubleEveryOther [1,2,3,4]",                   
+                    result = show $ doubleEveryOther [1,2,3,4],
+                    expected = "[1,4,3,8]"
+                },
+                Test {
+                    name = "doubleEveryOther [1,2,3] ",                  
+                    result = show $ doubleEveryOther [1,2,3], 
+                    expected = "[1,4,3]"
+                },              
+                Test {
+                    name = "doubleEveryOther []",                   
+                    result = show $ doubleEveryOther [],
+                    expected = "[]"
+                },
+                Test {
+                    name = "mySquare 0",                   
+                    result = show $ mySquare 0,
+                    expected = "0"
+                },
+                Test {
+                    name = "mySquare 1 ",                  
+                    result = show $ mySquare 1, 
+                    expected = "1"
+                },              
+                Test {
+                    name = "mySquare (-5)",                   
+                    result = show $ mySquare (-5),
+                    expected = "25"
+                },
+                Test {
+                    name = "sqSum []",                   
+                    result = show $ sqSum [],
+                    expected = "0"
+                },
+                Test {
+                    name = "sqSum [1,2,3,4] ",                  
+                    result = show $ sqSum [1,2,3,4], 
+                    expected = "30"
+                },              
+                Test {
+                    name = "sqSum [(-1), (-2), (-3), (-4)]",                   
+                    result = show $ sqSum [(-1), (-2), (-3), (-4)],
+                    expected = "30"
+                },
+
+                Test {
+                    name = "sumDigits [1,2,34,232]",                   
+                    result = show $ sumDigits [1,2,34,232],
+                    expected = "17"
+                },
+                Test {
+                    name = "sumDigits []",                  
+                    result = show $ sumDigits [], 
+                    expected = "0"
+                },              
+                Test {
+                    name = "sumDigits [(-34)]",                   
+                    result = show $ sumDigits [(-34)],
+                    expected = "0"
+                },
+                Test {
+                    name = "sepConcat \", \" []",                   
+                    result = show $ sepConcat ", " [],
+                    expected = "\"\""
+                },
+                Test {
+                    name = "sepConcat \", \" [\"foo\", \"bar\", \"baz\"]",                  
+                    result = show $ sepConcat ", " ["foo", "bar", "baz"], 
+                    expected = "\"foo, bar, baz\""
+                },              
+                Test {
+                    name = "sepConcat \"#\" [\"a\",\"b\",\"c\",\"d\",\"e\"]",                   
+                    result = show $ sepConcat "#" ["a","b","c","d","e"],
+                    expected = "\"a#b#c#d#e\""
+                }
+            ]
+        },
+        Problem 
+        {
+            title = "Part C: Credit Card problem",
+            description = "Using the above written functions, create a validate function to decide if a number is legal to use as credit card using Luhn algorithm",
+            score = 12,
+            tests = 
+            [
+                Test {
+                    name = "validate 4723304884813",                  
+                    result = show $ validate 4723304884813,
+                    expected = "True"
+                },
+                Test {
+                    name = "validate 4012888888881881",                   
+                    result = show $ validate 4012888888881881, 
+                    expected = "True"
+                },              
+                Test {
+                    name = "validate 4012888888881882",                   
+                    result = show $ validate 4012888888881882,
+                    expected = "False"
+                }
+
+            ]
+        },
+        Problem 
+        {
+            title = "Part D: Sorts Algorithm",
+            description = "You will create helper functions for merge Sort and then create mergeSort itself",
+            score = 25,
+            tests = 
+            [
+                Test {
+                    name = "splitHalf [1,2,3,4,5]",                   
+                    result = show $ splitHalf [1,2,3,4,5],
+                    expected = "([1,2],[3,4,5])"
+                },
+                Test {
+                    name = "splitHalf [1,2,3,4,5,6]",
+                    result = show $ splitHalf [1,2,3,4,5,6], 
+                    expected = "([1,2,3],[4,5,6])"
+                },              
+                Test {
+                    name = "splitHalf [1]",               
+                    result = show $ splitHalf [1],
+                    expected = "([],[1])"
+                },
+                Test {
+                    name = "mergeList [(\"dat\",1),(\"scott\",5)] [(\"dan\",3),(\"scotty\",4)]",                   
+                    result = show $ mergeList [("dat",1),("scott",5)] [("dan",3),("scott",4)],
+                    expected = "[(\"dat\",1),(\"dan\",3),(\"scotty\",4),(\"scott\",5)]"
+                },
+                Test {
+                    name = "mergeList [(\"danny\",5),(\"scott\",35)] [(\"dan\",3),(\"scotty\",4)]",
+                    result = show $ mergeList [("danny",5),("scott",35)] [("dan",3),("scotty",4)], 
+                    expected = "[(\"dan\",3),(\"scotty\",4),(\"danny\",5),(\"scott\",35)]"
+                },         
+                Test {
+                    name = "mergeSort [(\"dat\",1),(\"scott\",5),(\"Tim\",2)]",                   
+                    result = show $ mergeSort [("dat",1),("scott",5),("Tim",2)],
+                    expected = "[(\"dat\",1),(\"Tim\",2),(\"scott\",5)]"
+                },
+                Test {
+                    name = "mergeSort [(\"dat\",1),(\"dan\",5),(\"scott\",4),(\"scottish\",3)]",
+                    result = show $ mergeSort [("dat",1),("dan",5),("scott",4),("scottish",3)], 
+                    expected = "[(\"dat\",1),(\"scottish\",3),(\"scott\",4),(\"dan\",5)]"
+
+                }              
+
+            ]                         
+        },
+        Problem 
+        {
+            title = "Part E: New Type",
+            description = "You will create functions that work with integer that is bigger than Max int size",
+            score = 25,
+            tests = 
+            [
+                Test {
+                    name = "clone 3 5",                   
+                    result = show $ clone 3 5,
+                    expected = "[3,3,3,3,3]"
+                },
+                Test {
+                    name = "clone \"foo\" 2",
+                    result = show $ clone "foo" 2, 
+                    expected = "[\"foo\",\"foo\"]"
+                },              
+                Test {
+                    name = "clone \"foo\" 0",               
+                    result = show $ clone "foo" 0,
+                    expected = "[]"
+                },
+                Test {
+                    name = "padZero [9,9] [1,0,0,2]",                   
+                    result = show $ padZero [9,9] [1,0,0,2],
+                    expected = "([0,0,9,9],[1,0,0,2])"
+                },
+                Test {
+                    name = "padZero [1,2,3] [1,2,3]",
+                    result = show $  padZero [1,2,3] [1,2,3], 
+                    expected = "([1,2,3],[1,2,3])"
+
+                },
+                Test {
+                    name = "padZero [1,2,3,4,5] [1,2,3]",
+                    result = show $ padZero [1,2,3,4,5] [1,2,3],
+                    expected = "([1,2,3,4,5],[0,0,1,2,3])"
+
+                },              
+                Test {
+                    name = "removeZero [0,0,0,1,0,0,2]",               
+                    result = show $ removeZero [0,0,0,1,0,0,2],
+                    expected = "[1,0,0,2]"
+                },
+                Test {
+                    name = "removeZero [9,9]",                   
+                    result = show $ removeZero [9,9],
+                    expected = "[9,9]"
+                },
+                Test {
+                    name = "removeZero [0,0,0,0]",
+                    result = show $ removeZero [0,0,0,0], 
+                    expected = "[]"
+                },              
+                Test {
+                    name = "bigAdd [9,9] [1,0,0,2]",               
+                    result = show $ bigAdd [9,9] [1,0,0,2],
+                    expected = "[1,1,0,1]"
+                },
+                Test {
+                    name = "bigAdd [9,1,2,3,4,5,6,7,8,9,9,1,2,3,4,5,6,7] [1,2,3,4,5,6,7,8,8,9,8,2,3,4,5,6,7,7,8]",                   
+                    result = show $ bigAdd [9,1,2,3,4,5,6,7,8,9,9,1,2,3,4,5,6,7] [1,2,3,4,5,6,7,8,8,9,8,2,3,4,5,6,7,7,8],
+                    expected = "[2,1,4,6,9,1,3,5,6,8,8,1,4,6,9,1,3,4,5]"
+                },
+                Test {
+                    name = "mulByDigit 9 [9,9,9,9]",
+                    result = show $ mulByDigit 9 [9,9,9,9], 
+                    expected = "[8,9,9,9,1]"
+
+                },              
+                Test {
+                    name = "mulByDigit 0 [9,9,9,9]",               
+                    result = show $ mulByDigit 0 [9,9,9,9],
+                    expected = "[]"
+                },
+                 Test {
+                    name = " mulByDigit 9 [1,2,3,4,5,6,7,8,8,9,8,2,3,4,5,6,7,7,8,2]",               
+                    result = show $  mulByDigit 9 [1,2,3,4,5,6,7,8,8,9,8,2,3,4,5,6,7,7,8,2],
+                    expected = "[1,1,1,1,1,1,1,1,0,0,8,4,1,1,1,1,1,0,0,3,8]"
+                },
+                Test {
+                    name = "bigMul [9,9,9,9] [9,9,9,9]",                   
+                    result = show $ bigMul [9,9,9,9] [9,9,9,9],
+                    expected = "[9,9,9,8,0,0,0,1]"
+                },
+                Test {
+                    name = "bigMul [9,9,9,9,9] [9,9,9,9,9]",
+                    result = show $ bigMul [9,9,9,9,9] [9,9,9,9,9], 
+                    expected = "[9,9,9,9,8,0,0,0,0,1]"
+
+                },              
+                Test {
+                    name = "bigMul [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9] [9,9,9,9,9,9,9,9,9,9,9,0,0,0,0]",               
+                    result = show $ bigMul [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9] [9,9,9,9,9,9,9,9,9,9,9,0,0,0,0],
+                    expected = "[9,9,9,9,9,9,9,9,9,9,8,9,9,9,9,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0]"
+                }
+
+            ]
+                         
+        }      
+
+    ]
