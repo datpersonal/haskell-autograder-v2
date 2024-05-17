@@ -1,7 +1,7 @@
 # modified-haskell-autograder
 This is created using the original forked from [danalizieors](https://github.com/danalizieors/haskell-autograder)
 
-In this particular autograder, the autograder liminating the used of certain built-in haskell function to minimize the use of AI to assist student on creating functions, as the code below: the first part will be what to export from Solution
+In this particular autograder, the autograder liminating the used of certain built-in haskell function. The first part will be what to export from Solution.hs, the next ``import Prelude`` will be what allow in the Solution.hs file. The section of code below are shown:
 
 ```prolog
 --Do Not Modify--
