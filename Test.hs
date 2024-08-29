@@ -370,7 +370,7 @@ exam =
                 },
                 Test {
                     name = "mergeList [(\"dat\",1),(\"scott\",5)] [(\"dan\",3),(\"scotty\",4)]",                   
-                    result = show $ mergeList [("dat",1),("scott",5)] [("dan",3),("scott",4)],
+                    result = show $ mergeList [("dat",1),("scott",5)] [("dan",3),("scotty",4)],
                     expected = "[(\"dat\",1),(\"dan\",3),(\"scotty\",4),(\"scott\",5)]"
                 },
                 Test {
